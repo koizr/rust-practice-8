@@ -71,8 +71,13 @@ mod string {
     // UTF-8エンコードに関する詳細を心に留めておいてください！
 
     #[allow(dead_code)]
-    fn big_latin(s: &String) -> &str {
-        ""
+    fn big_latin(s: &str) -> String {
+        let first = &s[0..1];
+        if vec!["a", "i", "u", "e", "o"].contains(&first) {
+            format!("{}-hay", s)
+        } else {
+            format!("{}-{}ay", &s[1..], first)
+        }
     }
 
     #[cfg(test)]
@@ -81,12 +86,12 @@ mod string {
 
         #[test]
         fn consonant() {
-            assert_eq!(big_latin(&String::from("rust")), "ust-ray")
+            assert_eq!(big_latin("rust"), "ust-ray")
         }
 
         #[test]
         fn vowel() {
-            assert_eq!(big_latin(&String::from("apple")), "apple-hay")
+            assert_eq!(big_latin("apple"), "apple-hay")
         }
     }
 }
