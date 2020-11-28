@@ -1,4 +1,4 @@
-mod list {
+pub mod list {
     // 整数のリストが与えられ、ベクタを使って
     // - mean(平均値)
     // - median(ソートされた時に真ん中に来る値)
@@ -7,8 +7,7 @@ mod list {
 
     use std::collections::HashMap;
 
-    #[allow(dead_code)]
-    fn mean(numbers: &Vec<i32>) -> i32 {
+    pub fn mean(numbers: &Vec<i32>) -> i32 {
         let mut sum = 0;
         for n in numbers {
             sum += n;
@@ -16,15 +15,13 @@ mod list {
         sum / numbers.len() as i32
     }
 
-    #[allow(dead_code)]
-    fn median(numbers: &Vec<i32>) -> i32 {
+    pub fn median(numbers: &Vec<i32>) -> i32 {
         let mut numbers = numbers.clone();
         numbers.sort();
         numbers[numbers.len() / 2]
     }
 
-    #[allow(dead_code)]
-    fn mode(numbers: &Vec<i32>) -> i32 {
+    pub fn mode(numbers: &Vec<i32>) -> i32 {
         let mut counts = HashMap::new();
         for n in numbers {
             let count = counts.entry(n).or_insert(0);
@@ -63,7 +60,7 @@ mod list {
     }
 }
 
-mod string {
+pub mod string {
     // 文字列をピッグ・ラテン(訳注: 英語の言葉遊びの一つ)に変換してください。
     // 各単語の最初の子音は、 単語の終端に移り、"ay"が足されます。
     // 従って、"first"は"irst-fay"になります。
@@ -71,7 +68,7 @@ mod string {
     // UTF-8エンコードに関する詳細を心に留めておいてください！
 
     #[allow(dead_code)]
-    fn big_latin(s: &str) -> String {
+    pub fn big_latin(s: &str) -> String {
         let first = &s[0..1];
         if vec!["a", "i", "u", "e", "o"].contains(&first) {
             format!("{}-hay", s)
